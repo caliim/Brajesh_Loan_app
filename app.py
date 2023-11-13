@@ -10,6 +10,18 @@ clf=pickle.load(model_pickle)
 def ping():
     return{"message": "Hi , I am working absolutely fine!"}
 
+@app.route("/params", methods=['GET'])
+def get_app_params():
+    parameters={
+    "Gender": "<Male/Female>",
+    "Married": "<Unmarried/Married>",
+    "ApplicantIncome": "<income>",
+    "Credit_History": "Cleared Debts",
+    "LoanAmount": "<loan amount>"
+    }
+    
+    
+
 ## defining the endpoint which will make the prediction
 @app.route('/predict', methods = ['POST'])
 def prediction():
@@ -33,11 +45,10 @@ def prediction():
         Credit_History = 1  
     
     ApplicantIncome = loan_req['ApplicantIncome']
-    LoanAmount = loan_req['LoanAmount'] / 1000
+    LoanAmount = loan_req['LoanAmount']
  
     # Making predictions 
-    prediction = clf.predict( 
-        [[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
+    prediction = clf.predict( [[Gender, Married, ApplicantIncome, LoanAmount, Credit_History]])
      
     if prediction == 0:
         pred = 'Rejected'
@@ -48,5 +59,5 @@ def prediction():
         'loan_approval_status': pred
     }
 
-    return jsonify(result)
+    return {"loan_approval_status": pred}
 
