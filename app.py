@@ -11,15 +11,17 @@ def ping():
     return{"message": "Hi , I am working absolutely fine!"}
 
 @app.route("/params", methods=['GET'])
-def get_app_params():
-    parameters={
-    "Gender": "<Male/Female>",
-    "Married": "<Unmarried/Married>",
-    "ApplicantIncome": "<income>",
-    "Credit_History": "Cleared Debts",
-    "LoanAmount": "<loan amount>"
+def get_application_params():
+    """
+    """
+    parameters = {
+    'Gender': "<Male/Female>",
+    'Married': "<Married/Unmarried>",
+    'ApplicantIncome': "<Income amount>",
+    'Credit_History': "Cleared Debts",
+    'LoanAmount': "<Loan Amount>"
     }
-    
+    return parameters
     
 
 ## defining the endpoint which will make the prediction
